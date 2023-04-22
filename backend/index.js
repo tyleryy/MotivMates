@@ -1,8 +1,7 @@
 
  // Import the functions you need from the SDKs you need
  import { initializeApp } from "firebase/app";
- import { collection, getDocs} from 'firebase/firestore';
- import { getFirestore, setDoc, doc} from 'firebase/firestore'
+ import { collection, getDocs, getFirestore, setDoc, doc, getDoc} from 'firebase/firestore'
  // TODO: Add SDKs for Firebase products that you want to use
  // https://firebase.google.com/docs/web/setup#available-libraries
 import express from 'express';
@@ -48,6 +47,23 @@ const update_quote = async (req, res) => {
         await setDoc(doc(db, 'relations', req.body.username), req.body)
         return
 }
+
+const get_quote = async (req, res) => {
+    const docSnap = await getDoc(doc(db, "relations", req.query.docname))
+    if (docSnap.exists()) {
+        res.send(docSnap.data())
+      } else {
+        console.log("No such document!");
+      }
+}
+
+
+API.get('/api/get-quote', (req, res) => {
+    get_quote(req, res)
+})
+
+
+
 API.post('/api/update-quote', (req, res) => {
     update_quote(req, res)
 })
