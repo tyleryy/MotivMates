@@ -1,0 +1,25 @@
+.title {
+    font-size: 60px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(29, 38, 85);
+  }
+
+.center {
+    text-align: center;
+    padding-top: 50px
+ }
+
+ .right {
+    text-align: right;
+    padding-top: 25px;
+    padding-right: 25px
+ }
+ 
+
+ .spacing {
+    padding-top: 60px;
+ }
+ 
