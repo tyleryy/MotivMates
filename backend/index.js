@@ -31,14 +31,19 @@ API.get('/', (req, res) => {
     res.send('health check');
 });
 
-API.get('/firestore', async (req,res) => {
+const firestore_func = async (res) => {
     const user_data = collection(db, 'relations');
     const query = await getDocs(user_data);
     const query_list = query.docs.map(doc=>doc.data());
     console.log(query_list);
-    return query_list; 
+    res.send(query_list)
+    return query_list
+}
+
+API.get('/firestore', (req,res) => {
+    firestore_func(res);
 })
 
-API.listen(port, () => {
+API.listen(port, (req, res) => {
     console.log(`Server is listening on port ${port}`)
 })
