@@ -23,7 +23,9 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Login />
+      <div className="App">
+        <Login />
+      </div>
     {/* <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
