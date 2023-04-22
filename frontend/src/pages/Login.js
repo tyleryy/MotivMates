@@ -19,7 +19,7 @@ function Login(theme) {
     }
     
 
-    return <Container>
+    return <Container style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <Typography
         variant="h6"
         color="textPrimary"
@@ -28,23 +28,23 @@ function Login(theme) {
             marginTop: 2,
             fontFamily: theme.fontFamily,
             fontWeight: "bold"
-
         }}
         gutterBottom>
             MotivMates
         </Typography>
         
-        <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+        <form noValidate autoComplete='off' onSubmit={handleSubmit} style={{width: "50%"}}>
             <TextField
             onChange={(e) => setUsername(e.target.value)}
             sx = {{
                 marginTop: 2,
                 marginBottom: 2,
-                display: 'block'
+                display: 'block',
             }}
-            label="Username"
             fullWidth
-            required>
+            label="Username"
+            required
+            >
             </TextField>
 
             <TextField
@@ -52,10 +52,10 @@ function Login(theme) {
             sx = {{
                 marginTop: 2,
                 marginBottom: 2,
-                display: 'block'
+                display: 'block',
             }}
-            label="Password"
             fullWidth
+            label="Password"
             required>
             </TextField>
 
