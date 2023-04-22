@@ -3,10 +3,10 @@ import './App.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import Contract from './pages/Contract'
-import Login from './pages/Login'
-import Menu from './pages/Menu'
-import StartPage from './pages/Startpage'
+import Contract from './pages/Contract/Contract.js'
+import Login from './pages/Login/Login.js'
+import Menu from './pages/Menu/Menu.js'
+import StartPage from './pages/Startpage/Startpage.js'
 
 
 const theme = createTheme({

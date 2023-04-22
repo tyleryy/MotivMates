@@ -51,7 +51,7 @@ function Startpage() {
        <h1 className="title">MotiveMates</h1>
      </div>
      <div className='spacing'>
-       <img src={require('../assets/tree3.webp')} alt="tree grows" className='image'/>
+       <img src={require('../../assets/tree3.webp')} alt="tree grows" className='image'/>
      </div>
   
    </div>
