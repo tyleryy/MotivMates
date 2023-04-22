@@ -2,6 +2,25 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect } from 'react';
 import axios from 'axios'
+import Login from './pages/Login.js';
+import { createTheme } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#2c387e"
+    }
+  },
+  typography: {
+    fontFamily: "Quicksand",
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
+  }
+});
+
 
 function App() {
 
@@ -25,8 +44,10 @@ function App() {
 
 
   return (
-    <div className="App">
       
+    <ThemeProvider theme={theme}>
+      <Login />
+    {/* <div className="App">
       <header className="App-header">
         
         <img src={logo} className="App-logo" alt="logo" />
@@ -44,7 +65,8 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
+    </div> */}
+    </ThemeProvider>
   );
 }
 
