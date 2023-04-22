@@ -7,7 +7,6 @@
 import express from 'express';
 import cors from 'cors'
 import bodyParser from "body-parser";
-
  
  const API = express();
  API.use(cors());
@@ -57,12 +56,9 @@ const get_quote = async (req, res) => {
       }
 }
 
-
 API.get('/api/get-quote', (req, res) => {
     get_quote(req, res)
 })
-
-
 
 API.post('/api/update-quote', (req, res) => {
     update_quote(req, res)

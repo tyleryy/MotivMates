@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Login from './pages/Login.js';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Contract from './pages/Contract'
+import Login from './pages/Login'
+import Menu from './pages/Menu'
+import StartPage from './pages/Startpage'
+
 
 const theme = createTheme({
   palette: {
@@ -20,10 +25,21 @@ const theme = createTheme({
 });
 
 
+
+
 function App() {
+
+
   return (
     <ThemeProvider theme={theme}>
-      <Login />
+      <Router>
+      <Routes>
+        <Route exact path="/" element={<StartPage/>}/>
+        <Route path="/login" element={<Login/>} />
+        {/* <Route path="/contract" element={<Contract/>}/> */}
+        <Route path="/menu" element={<Menu/>}/>
+      </Routes>
+    </Router>
     {/* <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
