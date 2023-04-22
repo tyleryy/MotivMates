@@ -1,5 +1,5 @@
 // Import FirebaseAuth and firebase.
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -15,28 +15,58 @@ const config = {
     appId: "1:693369238340:web:7a3cc222a0754e6b805d11",
     measurementId: "G-XRLEV03ZNK"
   };
-
 firebase.initializeApp(config);
 
 // Configure FirebaseUI.
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: 'popup',
-  // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-  signInSuccessUrl: '/signedIn',
   // We will display Google and Facebook as auth providers.
   signInOptions: [
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
+  callbacks: {
+    // Avoid redirects after sign-in.
+    signInSuccessWithAuthResult: () => false,
+  },
 };
 
 function Signup() {
+  const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+
+  // Listen to the Firebase Auth state and set the local state.
+  useEffect(() => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+      setIsSignedIn(!!user);
+    });
+    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+  }, []);
+  
+  useEffect(() => {
+    if (firebase.auth().currentUser != null) {
+        console.log(firebase.auth().currentUser.email);
+        console.log(firebase.auth().currentUser.displayName);
+        console.log(firebase.auth().currentUser.uid);
+    }
+    // Ask for user's display name (if not possible, jsut read their email)
+    // Store in the database an entry
+    
+  }, [isSignedIn])
+
+  if (!isSignedIn) {
+    return (
+      <div>
+        <h1>My App</h1>
+        <p>Please sign-in:</p>
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      </div>
+    );
+  }
   return (
     <div>
-      <h1>My App</h1>
-      <p>Please sign-in:</p>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      <h1>MotiveMates</h1>
+      <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+      <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
     </div>
   );
 }
