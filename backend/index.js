@@ -1,16 +1,19 @@
 
  // Import the functions you need from the SDKs you need
  import { initializeApp } from "firebase/app";
- import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
+ import { collection, getDocs} from 'firebase/firestore';
+ import { getFirestore, setDoc, doc} from 'firebase/firestore'
  // TODO: Add SDKs for Firebase products that you want to use
  // https://firebase.google.com/docs/web/setup#available-libraries
 import express from 'express';
 import cors from 'cors'
+import bodyParser from "body-parser";
 
  
  const API = express();
  API.use(cors());
- const port = 3000;
+ API.use(bodyParser.json())
+ const port = 2000;
 
 const firebaseConfig = {
     apiKey: "AIzaSyA3TwYE8yiEm7e7s80kHPFfnXLDvuBF1Sg",
@@ -27,11 +30,11 @@ const firebaseConfig = {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app)
 
-API.get('/', (req, res) => {
+API.get('/api/', (req, res) => {
     res.send('health check');
 });
 
-const firestore_func = async (res) => {
+const getAll = async (res) => {
     const user_data = collection(db, 'relations');
     const query = await getDocs(user_data);
     const query_list = query.docs.map(doc=>doc.data());
@@ -40,8 +43,17 @@ const firestore_func = async (res) => {
     return query_list
 }
 
-API.get('/firestore', (req,res) => {
-    firestore_func(res);
+const update_quote = async (req, res) => {
+        const user_data = collection(db, 'relations');
+        await setDoc(doc(db, 'relations', req.body.username), req.body)
+        return
+}
+API.post('/api/update-quote', (req, res) => {
+    update_quote(req, res)
+})
+
+API.get('/api/get-all', (req,res) => {
+    getAll(res);
 })
 
 API.listen(port, (req, res) => {
