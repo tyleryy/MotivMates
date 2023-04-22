@@ -35,11 +35,15 @@ function Startpage() {
 
  return (
    <div>
-     <div>
-       <Button onClick={goToSignUp} variant="contained" sx={{backgroundColor: 'grey'}} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/" style={{float: 'right'}}>
+     <div className='auth-buttons'>
+       <Button className='sign-in' onClick={goToSignUp} variant="contained" 
+       sx={{
+        backgroundColor: 'black',
+        marginRight: 2,
+      }} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/">
          Sign In
        </Button>
-       <Button onClick={goToLogin} variant="contained" sx={{backgroundColor: 'grey'}} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/" style={{float: 'right'}}>
+       <Button className='log-in' onClick={goToLogin} variant="contained" sx={{backgroundColor: 'black' }} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/">
          Log In
        </Button>
      </div>
