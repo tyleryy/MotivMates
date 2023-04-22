@@ -30,7 +30,7 @@ function Login(theme) {
             fontWeight: "bold"
         }}
         gutterBottom>
-            MotivMates
+            Log In to MotiveMates
         </Typography>
         
         <form noValidate autoComplete='off' onSubmit={handleSubmit} style={{width: "50%"}}>
