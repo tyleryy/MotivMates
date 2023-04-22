@@ -32,6 +32,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <div className='App'>
       <Router>
       <Routes>
         <Route exact path="/" element={<StartPage/>}/>
@@ -56,6 +57,7 @@ function App() {
         </a>
       </header>
     </div> */}
+    </div>
     </ThemeProvider>
   );
 }
