@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import { Container, Typography } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import {TextField} from '@mui/material';
-import '../index.css';
+import '../../index.css';
 import { useState } from 'react';
 
 function Login(theme) {
@@ -30,7 +30,7 @@ function Login(theme) {
             fontWeight: "bold"
         }}
         gutterBottom>
-            MotivMates
+            Log In to MotiveMates
         </Typography>
         
         <form noValidate autoComplete='off' onSubmit={handleSubmit} style={{width: "50%"}}>
