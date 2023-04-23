@@ -21,7 +21,9 @@ import FriendList from './Friendlist/Friendlist.js';
 import { Context } from '../../providers/provider';
 import {setDoc, doc, getDoc} from 'firebase/firestore';
 
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { collection } from "firebase/firestore";
 
 function Addfriend() {
   const [open, setOpen] = useState(false);
@@ -132,6 +134,7 @@ function Menu() {
   const [friendListType, setFriendListType] = React.useState(3);
   const friends = React.useRef([]);
 
+  // Navigation Stuff
   const navigate = useNavigate();
 
   const goToGoal = (e) => {
@@ -142,19 +145,36 @@ function Menu() {
     navigate('/contract');
   }
 
+  // Database Stuff
+  const globals = useContext(Context);
+  const db = globals.db;
+  const [friendData, setFriendData] = useState([]);
+  const fetchFriends = async () => {
+    await getDoc(doc(db, "relations", email))
+            .then((querySnapshot)=>{
+                if (!querySnapshot.exists()) {throw Error();}               
+                const newData = querySnapshot.data();
+                setFriendData(newData);
+            })
+  }
+
+  React.useEffect(() => {
+    fetchFriends();
+  },[])
+
   // This is where the database returns friends list
   let arr = [];
   let func = () => {navigate('/menu');};
   if (friendListType === 2)
-  { arr = ["pending"]; }
+  { arr = friendData.incoming_req; }
   else if (friendListType === 1)
   { 
-    arr = ["inactive", "inactive", "inactive"];
+    arr = friendData.friends.Active;
     func = goToContract;
   }
   else 
   { 
-    arr = ["accepted", "accepted"]; 
+    arr = friendData.friends.Inactive;
     func = goToGoal;
   }
   friends.current = [...arr];
