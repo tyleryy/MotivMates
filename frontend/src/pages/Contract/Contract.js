@@ -120,7 +120,6 @@ function Contract() {
 
 
       // const contract_listener = ref(RTdatabase, 'users/' + )
-    }, [])
     //   const contract_listener = ref(RTdatabase, 'users/' + )
     // }, [])
 
