@@ -44,10 +44,6 @@ function Startpage() {
        <Button className='log-in' onClick={goToSignUp} variant="contained" sx={{backgroundColor: 'black' }}>
          Log In
        </Button>
-
-       <Button className='log-in' onClick={goToMenu} variant="contained" sx={{backgroundColor: 'black' }}>
-          DELETE LATER: Menu
-       </Button>
      </div>
      
      <div className='spacing'>

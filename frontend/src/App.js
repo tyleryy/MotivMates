@@ -1,9 +1,11 @@
 import logo from './logo.svg';
+import * as React from 'react';
 import './App.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Contract from './pages/Contract/Contract.js'
+import Goalpage from './pages/Activepage/Activepage.js';
 import Menu from './pages/Menu/Menu.js'
 import StartPage from './pages/Startpage/Startpage.js'
 import Signup from './pages/Signup/Signup';
@@ -47,8 +49,6 @@ const global_vars = {
 }
 
 
-
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -61,6 +61,7 @@ function App() {
         <Route path="/contract" element={<Contract/>}/>
         <Route path="/menu" element={<Menu/>}/>
         <Route path="/sign-up" element={<Signup/>}/>
+        <Route path="/goal" element={<Goalpage/>}/>
       </Routes>
     </Router>
     </div>

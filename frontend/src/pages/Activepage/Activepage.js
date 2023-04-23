@@ -2,12 +2,29 @@ import './Activepage.css';
 import Button from '@mui/material/Button';
 
 import * as React from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 // Fetch numdays from database: time end - current time
 let numDays = 5
 
-function Activepage() {
+function Goalpage() {
+
+  const navigate = useNavigate();
+
+  const goToMenu = (e) => {
+    e.preventDefault();
+    navigate('/menu');
+  }
+
+
     return(
+        <div>
+        <div>
+            <Button variant="contained" onClick={goToMenu} sx={{backgroundColor: 'black', marginLeft: 2, display: 'flex', justifyContent: 'left'}} >
+                Back
+            </Button>
+            </div>
         <div className='row'>
         <div className='column'>
         <div className='center'>
@@ -37,8 +54,10 @@ function Activepage() {
         </div>
 
         </div>
+        </div>
+        
 
     );
 }
 
-export default Activepage;
+export default Goalpage;

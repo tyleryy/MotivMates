@@ -105,19 +105,32 @@ function TextFields() {
 
 
 function Contract() {
+
+
+  const navigate = useNavigate();
+
+  const goToMenu = (e) => {
+    e.preventDefault();
+    navigate('/menu');
+  }
+
+  
     const global_vars = useContext(Context);
     let email = global_vars.email
     let name = global_vars.name
 
-    const navigate = useNavigate();
-
     return(
         <div>
+            <div>
+                <Button variant="contained" onClick={goToMenu} sx={{backgroundColor: 'black', marginLeft: 2, display: 'flex', justifyContent: 'left'}} >
+                    Back
+                </Button>
+              </div>
             <div className='spacing'>
                 <h1 className='title'>Mini Goal</h1>
             </div>
             <div className='row'>
-            <div className='column'>
+            <div className='contract-column'>
                 <div>
                 {/* Duration */}
                     <h2 className='spacing'>Duration of goal</h2>
@@ -128,7 +141,7 @@ function Contract() {
                     
                 </div>
             </div>
-            <div className='column'>
+            <div className='contract-column'>
                 <div>
                     {/* Goal */}
                     <h2 className='spacing'>Goal specification</h2>
