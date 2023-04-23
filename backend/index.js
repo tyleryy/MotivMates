@@ -1,7 +1,8 @@
 
  // Import the functions you need from the SDKs you need
  import { initializeApp } from "firebase/app";
- import { collection, getDocs, getFirestore, setDoc, doc, getDoc} from 'firebase/firestore'
+ import { collection, getDocs, getFirestore, setDoc, doc, getDoc} from 'firebase/firestore';
+ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
  // TODO: Add SDKs for Firebase products that you want to use
  // https://firebase.google.com/docs/web/setup#available-libraries
 import express from 'express';
@@ -27,6 +28,34 @@ const firebaseConfig = {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app)
+  const auth = getAuth(app);
+
+  // Sign up new users
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log("Error occurred while signing up user: " + errorMessage);
+  });
+
+  // Sign in existing users
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+
+
 
 API.get('/api/', (req, res) => {
     res.send('health check');
@@ -41,13 +70,13 @@ const getAll = async (res) => {
     return query_list
 }
 
-const update_quote = async (req, res) => {
+const update_user = async (req, res) => {
         const user_data = collection(db, 'relations');
         await setDoc(doc(db, 'relations', req.body.username), req.body)
         return
 }
 
-const get_quote = async (req, res) => {
+const get_user = async (req, res) => {
     const docSnap = await getDoc(doc(db, "relations", req.query.docname))
     if (docSnap.exists()) {
         res.send(docSnap.data())
@@ -56,12 +85,13 @@ const get_quote = async (req, res) => {
       }
 }
 
-API.get('/api/get-quote', (req, res) => {
-    get_quote(req, res)
+API.get('/api/get-user', (req, res) => {
+    get_user(req, res)
 })
 
-API.post('/api/update-quote', (req, res) => {
-    update_quote(req, res)
+
+API.post('/api/update-user', (req, res) => {
+    update_user(req, res)
 })
 
 API.get('/api/get-all', (req,res) => {
