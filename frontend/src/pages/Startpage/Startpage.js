@@ -16,8 +16,6 @@ import Button from '@mui/material/Button';
 
 
 
-
-
 function Startpage() {
 
   const navigate = useNavigate();
