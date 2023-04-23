@@ -64,9 +64,6 @@ function TextFields() {
             onChange={(e) => {textEditChange(e.target.value)}}
           />
         </div>
-        <div className='center'>
-        
-        </div>
         
       </Box>
     );
@@ -116,8 +113,8 @@ function Contract() {
 
   
     const global_vars = useContext(Context);
-    let email = global_vars.email
-    let name = global_vars.name
+    const app = global_vars.app;
+    const RTdatabase = getDatabase(app)
 
     return(
         <div>
@@ -166,18 +163,20 @@ function Contract() {
                         <div className='buttoncenter'>
                         <Button variant="contained" onClick={() => {
                           alert("Approved Mini Goal")
-                          navigate('/')
+                          navigate('/goal')
                           
                         }
                         } sx={{backgroundColor: 'green'}}>
                             Approve
                         </Button>
                         </div>
-                        <div className='buttoncenter1'>
-                        <Button variant="contained" onClick={() => alert("Denied Mini Goal")} sx={{
-                          backgroundColor: 'red',
-                          
-                      }}>
+                        <div className='buttoncenter'>
+                        <Button variant="contained" onClick={() => {
+                        alert("Denied Mini Goal") 
+                        navigate('/menu') 
+                        }
+                        }sx={{
+                          backgroundColor: 'red'}}>
                             Deny
                         </Button>
                         </div>

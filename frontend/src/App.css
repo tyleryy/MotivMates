@@ -1,9 +1,7 @@
 .App {
   text-align: center;
   /* background: linear-gradient(#8bc8e4, #9198e5); */
-  background: linear-gradient(#6789ce, #bca0bc);
-  height: 100vh;
-  width: 100vw;
+  background: repeating-linear-gradient(#6789ce, #bca0bc);
  }
  
  

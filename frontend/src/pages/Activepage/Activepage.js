@@ -20,13 +20,12 @@ function Goalpage() {
 
     return(
         <div>
-        <div>
-            <Button variant="contained" onClick={goToMenu} sx={{backgroundColor: 'black', marginLeft: 2, display: 'flex', justifyContent: 'left'}} >
-                Back
-            </Button>
-            </div>
+        
         <div className='row'>
         <div className='column'>
+        <Button variant="contained" onClick={goToMenu} sx={{backgroundColor: 'black', marginLeft: 2, display: 'flex', justifyContent: 'left', width:7}} >
+                Back
+            </Button>
         <div className='center'>
             <h1 className='title'>Days to goal</h1>
         </div>
@@ -49,8 +48,8 @@ function Goalpage() {
 
         </div>
 
-        <div className='column1'>
-            <img src={require('../../assets/Firedog.png')} className='image'></img>
+        <div className='column'>
+            <img src={require('../../assets/Firedog.png')} className='im'></img>
         </div>
 
         </div>
