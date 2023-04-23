@@ -1,47 +1,38 @@
 import './Contract.css';
 
-import * as React from 'react';
+import {useState, useEffect, useContext} from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-
+import { getDatabase } from "firebase/database";
+import { Context } from '../../providers/provider';
 import { useNavigate } from "react-router-dom";
 
 
-
-const marks = [
-    {
-      value: 25,
-      label: '1',
-    },
-    {
-      value: 50,
-      label: '2',
-    },
-    {
-      value: 75,
-      label: '3',
-    },
-    {
-      value: 100,
-      label: '4',
-    },
-  ];
-  
 //   function valuetext(value: number) {
 //     return `${value}°C`;
 //   }
   
   function DurationSlider() {
+
+    const [sliderVal, changeSliderVal] = useState(1);
+    
+
+
+    // useEffect( () => {
+    //   console.log(sliderVal)
+    // })
+
     return (
       <Box sx={{ width: 400 }}>
         <Slider
-          aria-label="Custom marks"
+          value={sliderVal}
+          aria-label="Volume"
           defaultValue={1}
-          step={25}
-          valueLabelDisplay="auto"
-          marks={marks}
+          onChange={(e)=>changeSliderVal(e.target.value)}
+          valueLabelDisplay="on"
+          max={30}
         />
         
       </Box>
@@ -51,6 +42,9 @@ const marks = [
 
 
 function TextFields() {
+
+  const [textEdit, textEditChange] = useState("")
+
     return (
       <Box
         component="form"
@@ -66,6 +60,8 @@ function TextFields() {
             multiline
             rows={4}
             defaultValue=""
+            value={textEdit}
+            onChange={(e) => {textEditChange(e.target.value)}}
           />
         </div>
         <div className='center'>
@@ -78,6 +74,8 @@ function TextFields() {
 
 
   function Displaytext() {
+    const [textView, textViewChange] = useState("")
+
     return (
         <div className='text'>
           <Box
@@ -98,7 +96,7 @@ function TextFields() {
               fontWeight: '700',
             }}
           style={{width: '100%'}}>
-            The other person's goal, pull from database 
+            {textView}
           </Box>
           
         </div>
@@ -117,6 +115,10 @@ function Contract() {
   }
 
   
+    const global_vars = useContext(Context);
+    let email = global_vars.email
+    let name = global_vars.name
+
     return(
         <div>
             <div>
@@ -132,7 +134,7 @@ function Contract() {
                 <div>
                 {/* Duration */}
                     <h2 className='spacing'>Duration of goal</h2>
-                    <p className='spacing'>Slide the slider to the number of weeks that you would like</p>
+                    <p className='spacing'>Slide the slider to the number of days that you would like</p>
                 </div>
                 <div className='spacing'>
                     <DurationSlider></DurationSlider>
@@ -162,12 +164,20 @@ function Contract() {
                 </div>
                 <div className='buttonrow'>
                         <div className='buttoncenter'>
-                        <Button variant="contained" onClick={console.log("Change this to show confirmed status")} sx={{backgroundColor: 'grey'}}>
+                        <Button variant="contained" onClick={() => {
+                          alert("Approved Mini Goal")
+                          navigate('/')
+                          
+                        }
+                        } sx={{backgroundColor: 'green'}}>
                             Approve
                         </Button>
                         </div>
                         <div className='buttoncenter1'>
-                        <Button variant="contained" onClick={console.log("Change this to show confirmed status")} sx={{backgroundColor: 'grey'}}>
+                        <Button variant="contained" onClick={() => alert("Denied Mini Goal")} sx={{
+                          backgroundColor: 'red',
+                          
+                      }}>
                             Deny
                         </Button>
                         </div>
