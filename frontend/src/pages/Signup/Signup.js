@@ -1,41 +1,35 @@
 // Import FirebaseAuth and firebase.
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { getDoc, setDoc, doc, getFirestore } from 'firebase/firestore';
+import { getDoc, setDoc, doc } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
 import 'firebase/compat/auth';
-
-// Configure Firebase.
-const config = {
-    apiKey: "AIzaSyA3TwYE8yiEm7e7s80kHPFfnXLDvuBF1Sg",
-    authDomain: "motivmates.firebaseapp.com",
-    databaseURL: "https://motivmates-default-rtdb.firebaseio.com",
-    projectId: "motivmates",
-    storageBucket: "motivmates.appspot.com",
-    messagingSenderId: "693369238340",
-    appId: "1:693369238340:web:7a3cc222a0754e6b805d11",
-    measurementId: "G-XRLEV03ZNK"
-  };
-const app = firebase.initializeApp(config);
-const db = getFirestore(app);
-
-// Configure FirebaseUI.
-const uiConfig = {
-  // Popup signin flow rather than redirect flow.
-  signInFlow: 'popup',
-  // We will display Google and Facebook as auth providers.
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-  ],
-  callbacks: {
-    // Avoid redirects after sign-in.
-    signInSuccessWithAuthResult: () => false,
-  },
-};
+import { Context } from '../../providers/provider';
 
 function Signup() {
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+
+  const globals = useContext(Context);
+  // Configure Firebase.
+  const config = globals.config
+  const app = globals.app
+  const db = globals.db
+
+  // Configure FirebaseUI.
+  const uiConfig = {
+    // Popup signin flow rather than redirect flow.
+    signInFlow: 'popup',
+    // We will display Google and Facebook as auth providers.
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      // Avoid redirects after sign-in.
+      signInSuccessWithAuthResult: () => false,
+    },
+  };
+
   
   const navigate = useNavigate();
   const goToMenu = () => {
@@ -52,9 +46,13 @@ function Signup() {
   
   const writeUserIntoFirebase = async() => {
     if (firebase.auth().currentUser != null) {
-        console.log(firebase.auth().currentUser.email);
-        console.log(firebase.auth().currentUser.displayName);
-        console.log(firebase.auth().currentUser.uid);
+        const myEmail = firebase.auth().currentUser.email;
+        const currentUser = firebase.auth().currentUser.displayName;
+        const uid =  firebase.auth().currentUser.uid;
+        localStorage.setItem("email", myEmail)
+        localStorage.setItem("name", currentUser)
+        localStorage.setItem("user-id", uid)
+
       
         const userDocRef = doc(db, "relations", firebase.auth().currentUser.email);
         const docSnap = await getDoc(userDocRef);

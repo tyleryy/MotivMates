@@ -4,7 +4,7 @@
 import './Menu.css';
 
 
-import * as React from 'react';
+import {useState, useContext} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -18,15 +18,46 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import FriendList from './Friendlist/Friendlist.js';
+import { Context } from '../../providers/provider';
+import {setDoc, doc, getDoc} from 'firebase/firestore';
 
 function Addfriend() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [text, changeText] = useState("")
+
+  const globals = useContext(Context);
+  const db = globals.db;
+  const config = globals.config;
+
+  async function friend_request (name) {
+
+    const docSnap = await getDoc(doc(db, "relations", name))
+    if (docSnap.exists()) {
+        let doc_data = docSnap.data()
+        const email = localStorage.getItem("email")
+        if (email === name)
+          throw Error();
+        doc_data.incoming_req.push(email)
+        await setDoc(doc(db, 'relations', name), doc_data)
+    } else {
+        throw Error();
+    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+
+    friend_request(text).then( () => {
+      alert("Friend Request sent!")
+    }
+
+    ).catch( () => {
+      if (text)
+        alert("Friend Request failed")
+    })
     setOpen(false);
   };
 
@@ -49,6 +80,10 @@ function Addfriend() {
                 autoFocus
                 margin="dense"
                 id="name"
+                value={text}
+                onChange={(event) => {
+                  changeText(event.target.value);
+                }}
                 label="Friend Username"
                 type="email"
                 fullWidth
