@@ -63,14 +63,10 @@
   .buttoncenter{
     display: flex;
     justify-content: center;
-    margin-right: 25px;
+    height:30px;
+    width:85px;
   }
 
-
-  .buttoncenter1{
-   display: flex;
-   justify-content: center;
- }
 
 
 
