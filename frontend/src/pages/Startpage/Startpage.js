@@ -38,10 +38,10 @@ function Startpage() {
        sx={{
         backgroundColor: 'black',
         marginRight: 2,
-      }} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/">
+      }} >
          Sign Up
        </Button>
-       <Button className='log-in' onClick={goToSignUp} variant="contained" sx={{backgroundColor: 'black' }} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/">
+       <Button className='log-in' onClick={goToSignUp} variant="contained" sx={{backgroundColor: 'black' }}>
          Log In
        </Button>
      </div>

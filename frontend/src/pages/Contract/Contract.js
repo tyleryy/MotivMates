@@ -6,6 +6,9 @@ import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+import { useNavigate } from "react-router-dom";
+
+
 
 const marks = [
     {
@@ -104,8 +107,23 @@ function TextFields() {
 
 
 function Contract() {
+
+
+  const navigate = useNavigate();
+
+  const goToMenu = (e) => {
+    e.preventDefault();
+    navigate('/menu');
+  }
+
+  
     return(
         <div>
+            <div>
+                <Button variant="contained" onClick={goToMenu} sx={{backgroundColor: 'black', marginLeft: 2, display: 'flex', justifyContent: 'left'}} >
+                    Back
+                </Button>
+              </div>
             <div className='spacing'>
                 <h1 className='title'>Mini Goal</h1>
             </div>
