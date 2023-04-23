@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import { Context } from '../../providers/provider';
 import { useNavigate } from "react-router-dom";
 
@@ -118,6 +118,17 @@ function Contract() {
     const global_vars = useContext(Context);
     const app = global_vars.app;
     const RTdatabase = getDatabase(app)
+
+    useEffect(() => {
+
+
+      const contract_listener = ref(RTdatabase, 'users/' + )
+    }, [])
+
+    // set(ref(RTdatabase, 'users/', localStorage.getItem("email")), {
+    //   username: name
+    // } )
+
 
     return(
         <div>
