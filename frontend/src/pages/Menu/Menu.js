@@ -34,8 +34,10 @@ function Addfriend() {
     const docSnap = await getDoc(doc(db, "relations", name))
     if (docSnap.exists()) {
         let doc_data = docSnap.data()
-        const myName = localStorage.getItem("name")
-        doc_data.incoming_req.push(myName)
+        const email = localStorage.getItem("email")
+        if (email === name)
+          throw Error();
+        doc_data.incoming_req.push(email)
         await setDoc(doc(db, 'relations', name), doc_data)
     } else {
         throw Error();
@@ -54,7 +56,7 @@ function Addfriend() {
 
     ).catch( () => {
       if (text)
-        alert("Friend Request failed: name not found")
+        alert("Friend Request failed")
     })
     setOpen(false);
   };
