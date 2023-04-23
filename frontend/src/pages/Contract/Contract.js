@@ -116,8 +116,8 @@ function Contract() {
 
   
     const global_vars = useContext(Context);
-    let email = global_vars.email
-    let name = global_vars.name
+    const app = global_vars.app;
+    const RTdatabase = getDatabase(app)
 
     return(
         <div>
