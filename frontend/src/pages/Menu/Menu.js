@@ -70,6 +70,7 @@ function Addfriend() {
         <Button variant="outlined" onClick={handleClickOpen}>
             Add a new friend
         </Button>
+
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Add Friend</DialogTitle>
             <DialogContent>
@@ -122,14 +123,14 @@ function ToggleButtons() {
 
 
 // make call to database for username
-let username = "placeholder_name"
 
+let email = localStorage.getItem('email');
 
 function Menu() {
  return (
    <div>
     <div className='right'>
-        <p>{username}</p>
+        <p>{ email ? email : "" }</p>
     </div>
     <div>
         {/* Add friends */}

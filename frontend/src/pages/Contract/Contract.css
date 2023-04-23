@@ -20,7 +20,6 @@
  }
 
  .text{
-    padding-top: 60px;
     width: 600px;
     height: 150px;
     display: flex;
@@ -71,7 +70,6 @@
   .buttoncenter1{
    display: flex;
    justify-content: center;
-   
  }
 
   

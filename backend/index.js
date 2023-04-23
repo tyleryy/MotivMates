@@ -30,30 +30,30 @@ const firebaseConfig = {
   const db = getFirestore(app)
   const auth = getAuth(app);
 
-  // Sign up new users
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log("Error occurred while signing up user: " + errorMessage);
-  });
+//   // Sign up new users
+// createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     console.log("Error occurred while signing up user: " + errorMessage);
+//   });
 
-  // Sign in existing users
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+//   // Sign in existing users
+//   signInWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });
 
 
 
@@ -65,7 +65,6 @@ const getAll = async (res) => {
     const user_data = collection(db, 'relations');
     const query = await getDocs(user_data);
     const query_list = query.docs.map(doc=>doc.data());
-    console.log(query_list);
     res.send(query_list)
     return query_list
 }
