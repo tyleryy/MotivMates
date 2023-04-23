@@ -19,6 +19,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import FriendList from './Friendlist/Friendlist.js';
 import { Context } from '../../providers/provider';
+import {setDoc, doc, getDoc} from 'firebase/firestore';
 
 function Addfriend() {
   const [open, setOpen] = useState(false);
@@ -28,9 +29,17 @@ function Addfriend() {
   const db = globals.db;
   const config = globals.config;
 
+  async function friend_request (name) {
 
-  const friend_request = async (name) => {
-    
+    const docSnap = await getDoc(doc(db, "relations", name))
+    if (docSnap.exists()) {
+        let doc_data = docSnap.data()
+        const myName = localStorage.getItem("name")
+        doc_data.incoming_req.push(myName)
+        await setDoc(doc(db, 'relations', name), doc_data)
+    } else {
+        throw Error();
+    }
   }
 
   const handleClickOpen = () => {
@@ -38,7 +47,15 @@ function Addfriend() {
   };
 
   const handleClose = () => {
-    
+
+    friend_request(text).then( () => {
+      alert("Friend Request sent!")
+    }
+
+    ).catch( () => {
+      if (text)
+        alert("Friend Request failed: name not found")
+    })
     setOpen(false);
   };
 

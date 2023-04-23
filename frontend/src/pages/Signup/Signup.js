@@ -1,7 +1,7 @@
 // Import FirebaseAuth and firebase.
 import React, { useContext, useEffect, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { getDoc, setDoc, doc, getFirestore } from 'firebase/firestore';
+import { getDoc, setDoc, doc } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import { useNavigate } from "react-router-dom";
 import 'firebase/compat/auth';
@@ -46,9 +46,13 @@ function Signup() {
   
   const writeUserIntoFirebase = async() => {
     if (firebase.auth().currentUser != null) {
-        console.log(firebase.auth().currentUser.email);
-        console.log(firebase.auth().currentUser.displayName);
-        console.log(firebase.auth().currentUser.uid);
+        const myEmail = firebase.auth().currentUser.email;
+        const currentUser = firebase.auth().currentUser.displayName;
+        const uid =  firebase.auth().currentUser.uid;
+        localStorage.setItem("email", myEmail)
+        localStorage.setItem("name", currentUser)
+        localStorage.setItem("user-id", uid)
+
       
         const userDocRef = doc(db, "relations", firebase.auth().currentUser.email);
         const docSnap = await getDoc(userDocRef);
