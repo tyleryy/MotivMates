@@ -20,11 +20,6 @@ function Startpage() {
 
   const navigate = useNavigate();
 
-  const goToLogin = (e) => {
-    e.preventDefault();
-    navigate('/login');
-  }
-
   const goToSignUp = (e) => {
     e.preventDefault();
     navigate('/sign-up');
