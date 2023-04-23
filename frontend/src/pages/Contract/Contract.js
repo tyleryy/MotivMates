@@ -64,9 +64,6 @@ function TextFields() {
             onChange={(e) => {textEditChange(e.target.value)}}
           />
         </div>
-        <div className='center'>
-        
-        </div>
         
       </Box>
     );
@@ -166,7 +163,7 @@ function Contract() {
                         <div className='buttoncenter'>
                         <Button variant="contained" onClick={() => {
                           alert("Approved Mini Goal")
-                          navigate('/menu')
+                          navigate('/goal')
                           
                         }
                         } sx={{backgroundColor: 'green'}}>
@@ -174,10 +171,12 @@ function Contract() {
                         </Button>
                         </div>
                         <div className='buttoncenter'>
-                        <Button variant="contained" onClick={() => alert("Denied Mini Goal")} sx={{
-                          backgroundColor: 'red',
-                          
-                      }}>
+                        <Button variant="contained" onClick={() => {
+                        alert("Denied Mini Goal") 
+                        navigate('/menu') 
+                        }
+                        }sx={{
+                          backgroundColor: 'red'}}>
                             Deny
                         </Button>
                         </div>
