@@ -43,8 +43,6 @@ function FriendCell({value, func}) {
 
 function Friendlist({ friends, type, func }) {
 
-  const navigate = useNavigate();
-
  return (
     <div className='layout'>
         <List sx={{ width: '100%', maxWidth: 800, bgcolor: 'background.paper', borderRadius: 1, margin : 5, background: "#6789ce" }}>

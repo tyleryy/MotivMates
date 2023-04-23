@@ -150,7 +150,7 @@ function Menu() {
   const db = globals.db;
   const [friendData, setFriendData] = useState([]);
   const fetchFriends = async () => {
-    await getDoc(doc(db, "relations", "linbn@uci.edu"))
+    await getDoc(doc(db, "relations", email))
             .then((querySnapshot)=>{
                 if (!querySnapshot.exists()) {throw Error();}               
                 const newData = querySnapshot.data();
