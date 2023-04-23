@@ -8,6 +8,12 @@ let numDays = 5
 
 function Activepage() {
     return(
+        <div>
+        <div>
+                <Button variant="contained" onClick={console.log("Change this to go to menu")} sx={{backgroundColor: 'black', marginLeft: 2, display: 'flex', justifyContent: 'left'}} >
+                    Back
+                </Button>
+              </div>
         <div className='row'>
         <div className='column'>
         <div className='center'>
@@ -37,6 +43,8 @@ function Activepage() {
         </div>
 
         </div>
+        </div>
+        
 
     );
 }

@@ -106,6 +106,11 @@ function TextFields() {
 function Contract() {
     return(
         <div>
+            <div>
+                <Button variant="contained" onClick={console.log("Change this to go to menu")} sx={{backgroundColor: 'black', marginLeft: 2, display: 'flex', justifyContent: 'left'}} >
+                    Back
+                </Button>
+              </div>
             <div className='spacing'>
                 <h1 className='title'>Mini Goal</h1>
             </div>

@@ -58,7 +58,7 @@ function App() {
       <Router>
       <Routes>
         <Route exact path="/" element={<StartPage/>}/>
-        {/* <Route path="/contract" element={<Contract/>}/> */}
+        <Route path="/contract" element={<Contract/>}/>
         <Route path="/menu" element={<Menu/>}/>
         <Route path="/sign-up" element={<Signup/>}/>
       </Routes>
