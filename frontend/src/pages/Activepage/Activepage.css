@@ -1,0 +1,73 @@
+.center{
+    display: flex;
+    justify-content: center;
+ }
+
+ .title {
+    font-size: 90px;
+    font-family: 'Impact';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-text-stroke: 2px black;
+    color: rgb(237, 178, 53);
+    margin-bottom: 30px;
+    margin-top: 70px;
+  }
+
+  .day {
+    font-size: 150px;
+    -webkit-text-stroke: 3px black;
+    font-family: 'Impact';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(237, 178, 53);
+    margin-bottom: 23px;
+    margin-top: 10px;
+    
+  }
+
+
+  .buttoncenter{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    margin-bottom: 60px;
+  }
+
+  .buttonrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+  }
+
+
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background: linear-gradient(rgb(134, 116, 116), rgb(134, 116, 116)) no-repeat center/2px 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    background: linear-gradient(#1a0202, rgb(195, 19, 12));
+  }
+
+  .column1 {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+
+  .image{
+    height: 100%
+  }
