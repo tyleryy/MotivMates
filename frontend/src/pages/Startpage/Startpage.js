@@ -49,11 +49,15 @@ function Startpage() {
           DELETE LATER: Menu
        </Button>
      </div>
+     
      <div className='spacing'>
        <h1 className="title">MotiveMates</h1>
      </div>
      <div className='spacing'>
-       <img src={require('../../assets/tree3.webp')} alt="tree grows" className='image'/>
+       <img src={require('../../assets/tree_on_island_1.png')} alt="tree grows" className='image floating1'/>
+       <img src={require('../../assets/tree_on_island_2.png')} alt="tree grows" className='image floating2'/>
+       <img src={require('../../assets/tree_on_island_3.png')} alt="tree grows" className='image floating3'/>
+
      </div>
   
    </div>
