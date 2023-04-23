@@ -17,6 +17,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
+import FriendList from './Friendlist/Friendlist.js';
+
 function Addfriend() {
   const [open, setOpen] = React.useState(false);
 
@@ -104,6 +106,7 @@ function Menu() {
     </div>
     <div>
         {/* Bottom navigation */}
+        <FriendList/>
         
     </div>
    </div>
