@@ -166,14 +166,14 @@ function Contract() {
                         <div className='buttoncenter'>
                         <Button variant="contained" onClick={() => {
                           alert("Approved Mini Goal")
-                          navigate('/')
+                          navigate('/menu')
                           
                         }
                         } sx={{backgroundColor: 'green'}}>
                             Approve
                         </Button>
                         </div>
-                        <div className='buttoncenter1'>
+                        <div className='buttoncenter'>
                         <Button variant="contained" onClick={() => alert("Denied Mini Goal")} sx={{
                           backgroundColor: 'red',
                           
