@@ -4,10 +4,12 @@ import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Contract from './pages/Contract/Contract.js'
-import Login from './pages/Login/Login.js'
 import Menu from './pages/Menu/Menu.js'
 import StartPage from './pages/Startpage/Startpage.js'
 import Signup from './pages/Signup/Signup';
+import firebase from 'firebase/compat/app';
+import { getFirestore } from 'firebase/firestore';
+import { Provider } from './providers/provider';
 
 const theme = createTheme({
   palette: {
@@ -24,23 +26,45 @@ const theme = createTheme({
   }
 });
 
+// Configure Firebase.
+const config = {
+  apiKey: "AIzaSyA3TwYE8yiEm7e7s80kHPFfnXLDvuBF1Sg",
+  authDomain: "motivmates.firebaseapp.com",
+  databaseURL: "https://motivmates-default-rtdb.firebaseio.com",
+  projectId: "motivmates",
+  storageBucket: "motivmates.appspot.com",
+  messagingSenderId: "693369238340",
+  appId: "1:693369238340:web:7a3cc222a0754e6b805d11",
+  measurementId: "G-XRLEV03ZNK"
+};
+const app = firebase.initializeApp(config);
+const db = getFirestore(app);
+
+const global_vars = {
+  "app": app,
+  "config": config,
+  "db": db
+}
+
 
 
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Provider contexts={global_vars}>
+
       <div className='App'>
       <Router>
       <Routes>
         <Route exact path="/" element={<StartPage/>}/>
-        <Route path="/login" element={<Login/>} />
         {/* <Route path="/contract" element={<Contract/>}/> */}
         <Route path="/menu" element={<Menu/>}/>
         <Route path="/sign-up" element={<Signup/>}/>
       </Routes>
     </Router>
     </div>
+    </Provider>
     </ThemeProvider>
   );
 }

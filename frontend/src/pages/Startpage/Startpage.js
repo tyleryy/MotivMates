@@ -2,7 +2,7 @@
 
 // import growtree from './assets/growtree.gif'
 import './Startpage.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
@@ -63,7 +63,6 @@ function Startpage() {
 
 
 export default Startpage;
-
 
 
 
