@@ -65,20 +65,20 @@ function Addfriend() {
 }
 
 
-function ToggleButtons() {
+function ToggleButtons({ selectFriends }) {
   
     return (
       <ToggleButtonGroup
         exclusive
         // onChange={change display}
       >
-        <ToggleButton value="left" aria-label="left aligned">
+        <ToggleButton value="left" aria-label="left aligned" onClick={ () => selectFriends(0) }>
           Active Friends
         </ToggleButton>
-        <ToggleButton value="center" aria-label="centered">
+        <ToggleButton value="center" aria-label="centered" onClick={ () => selectFriends(1) }>
           Inactive Friends
         </ToggleButton>
-        <ToggleButton value="right" aria-label="right aligned">
+        <ToggleButton value="right" aria-label="right aligned" onClick={ () => selectFriends(2) }>
           Pending Invitations
         </ToggleButton>
       </ToggleButtonGroup>
@@ -91,6 +91,19 @@ let username = "placeholder_name"
 
 
 function Menu() {
+  const [friendListType, setFriendListType] = React.useState(3);
+  const friends = React.useRef([]);
+
+
+  let arr = [];
+  if (friendListType == 2)
+  { arr = ["pending"]; }
+  else if (friendListType == 1)
+  { arr = ["inactive", "inactive", "inactive"]; }
+  else 
+  { arr = ["accepted", "accepted"]; }
+  friends.current = [...arr];
+
  return (
    <div>
     <div className='right'>
@@ -102,11 +115,11 @@ function Menu() {
     </div>
     <div className='center'>
         {/* Friends */}
-        <ToggleButtons></ToggleButtons>
+        <ToggleButtons selectFriends={setFriendListType}/>
     </div>
     <div>
         {/* Bottom navigation */}
-        <FriendList/>
+        <FriendList friends={friends.current}/>
         
     </div>
    </div>
