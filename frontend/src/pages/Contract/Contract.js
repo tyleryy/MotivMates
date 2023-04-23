@@ -119,7 +119,7 @@ function Contract() {
     useEffect(() => {
 
 
-      const contract_listener = ref(RTdatabase, 'users/' + )
+      // const contract_listener = ref(RTdatabase, 'users/' + )
     }, [])
 
     // set(ref(RTdatabase, 'users/', localStorage.getItem("email")), {

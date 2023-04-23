@@ -150,12 +150,10 @@ function Menu() {
   const db = globals.db;
   const [friendData, setFriendData] = useState([]);
   const fetchFriends = async () => {
-    await getDoc(doc(db, "relations", email))
-            .then((querySnapshot)=>{
-                if (!querySnapshot.exists()) {throw Error();}               
-                const newData = querySnapshot.data();
-                setFriendData(newData);
-            })
+    let querySnapshot = await getDoc(doc(db, "relations", email))
+    if (!querySnapshot.exists()) {throw Error();}               
+    const newData = querySnapshot.data();
+    setFriendData(newData);
   }
 
   React.useEffect(() => {
@@ -165,19 +163,23 @@ function Menu() {
   // This is where the database returns friends list
   let arr = [];
   let func = () => {navigate('/menu');};
-  if (friendListType === 2)
-  { arr = friendData.incoming_req; }
-  else if (friendListType === 1)
-  { 
-    arr = friendData.friends.Active;
-    func = goToContract;
+  if (friendData && friendData.friends) {
+    if (friendListType === 2)
+    { arr = friendData.incoming_req; }
+    else if (friendListType === 1)
+    { 
+      arr = friendData.friends.Active;
+      func = goToContract;
+    }
+    else 
+    { 
+      arr = friendData.friends.Inactive;
+      func = goToGoal;
+    }
   }
-  else 
-  { 
-    arr = friendData.friends.Inactive;
-    func = goToGoal;
-  }
-  friends.current = [...arr];
+  
+  if (arr)
+    friends.current = [...arr];
 
  return (
    <div>
