@@ -44,7 +44,7 @@ function Startpage() {
         backgroundColor: 'black',
         marginRight: 2,
       }} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/">
-         Sign In
+         Sign Up
        </Button>
        <Button className='log-in' onClick={goToSignUp} variant="contained" sx={{backgroundColor: 'black' }} href="https://pokemongohub.net/post/guide/rayquaza-raid-guide/">
          Log In
