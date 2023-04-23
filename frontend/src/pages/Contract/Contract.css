@@ -46,7 +46,7 @@
     background: linear-gradient(rgb(134, 116, 116), rgb(143, 126, 126)) no-repeat center/2px 100%;
   }
   
-  .column {
+  .contract-column {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;

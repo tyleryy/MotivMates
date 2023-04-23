@@ -23,7 +23,7 @@ function PendingCell({ value, idx }) {
     )
 }
 
-function FriendCell({value, idx}) {
+function FriendCell({value, idx, func}) {
 
     const FriendCard = styled(Card)(({ theme }) => ({
         height: 100,
@@ -32,7 +32,7 @@ function FriendCell({value, idx}) {
 
     return (
         <FriendCard raised="true" key={idx}>
-            <CardActionArea sx={{ width: "100%", height: "100%" }}>
+            <CardActionArea sx={{ width: "100%", height: "100%" }} onClick={() => {func()}}>
                 <ListItem>
                     {value} User
                 </ListItem>
@@ -41,7 +41,7 @@ function FriendCell({value, idx}) {
     )
 }
 
-function Friendlist({ friends, type }) {
+function Friendlist({ friends, type, func }) {
 
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ function Friendlist({ friends, type }) {
         <List sx={{ width: '100%', maxWidth: 800, bgcolor: 'background.paper', borderRadius: 1, margin : 5, background: "#6789ce" }}>
       {friends.map((value, idx) => {
             return (
-             (type != 2) ? <FriendCell value={value} idx={idx}/> : <PendingCell value={value} idx={idx}/>
+             (type != 2) ? <FriendCell value={value} idx={idx} func={func}/> : <PendingCell value={value} idx={idx}/>
             );
         })}
         </List>

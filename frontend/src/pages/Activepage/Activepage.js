@@ -6,7 +6,7 @@ import * as React from 'react';
 // Fetch numdays from database: time end - current time
 let numDays = 5
 
-function Activepage() {
+function Goalpage() {
     return(
         <div className='row'>
         <div className='column'>
@@ -41,4 +41,4 @@ function Activepage() {
     );
 }
 
-export default Activepage;
+export default Goalpage;

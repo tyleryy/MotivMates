@@ -110,7 +110,7 @@ function Contract() {
                 <h1 className='title'>Mini Goal</h1>
             </div>
             <div className='row'>
-            <div className='column'>
+            <div className='contract-column'>
                 <div>
                 {/* Duration */}
                     <h2 className='spacing'>Duration of goal</h2>
@@ -121,7 +121,7 @@ function Contract() {
                     
                 </div>
             </div>
-            <div className='column'>
+            <div className='contract-column'>
                 <div>
                     {/* Goal */}
                     <h2 className='spacing'>Goal specification</h2>

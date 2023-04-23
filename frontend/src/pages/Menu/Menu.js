@@ -2,7 +2,7 @@
 
 // import growtree from './assets/growtree.gif'
 import './Menu.css';
-
+import * as React from 'react';
 
 import {useState, useContext} from 'react';
 import Button from '@mui/material/Button';
@@ -20,6 +20,8 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import FriendList from './Friendlist/Friendlist.js';
 import { Context } from '../../providers/provider';
 import {setDoc, doc, getDoc} from 'firebase/firestore';
+
+import { useNavigate, useNavigation } from "react-router-dom";
 
 function Addfriend() {
   const [open, setOpen] = useState(false);
@@ -129,14 +131,31 @@ function Menu() {
   const [friendListType, setFriendListType] = React.useState(3);
   const friends = React.useRef([]);
 
+  const navigate = useNavigate();
+
+  const goToGoal = (e) => {
+    navigate('/goal');
+  }
+
+  const goToContract = (e) => {
+    navigate('/contract');
+  }
+
   // This is where the database returns friends list
   let arr = [];
+  let func = () => {navigate('/menu');};
   if (friendListType === 2)
   { arr = ["pending"]; }
   else if (friendListType === 1)
-  { arr = ["inactive", "inactive", "inactive"]; }
+  { 
+    arr = ["inactive", "inactive", "inactive"];
+    func = goToContract;
+  }
   else 
-  { arr = ["accepted", "accepted"]; }
+  { 
+    arr = ["accepted", "accepted"]; 
+    func = goToGoal;
+  }
   friends.current = [...arr];
 
  return (
@@ -154,7 +173,7 @@ function Menu() {
     </div>
     <div>
         {/* Bottom navigation */}
-        <FriendList friends={friends.current} type={friendListType}/>
+        <FriendList friends={friends.current} type={friendListType} func={func}/>
         
     </div>
    </div>
