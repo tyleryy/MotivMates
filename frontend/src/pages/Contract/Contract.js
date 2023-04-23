@@ -40,9 +40,7 @@ const marks = [
           valueLabelDisplay="auto"
           marks={marks}
         />
-        <Button variant="contained" onClick={console.log("Change this to show confirmed status")} sx={{backgroundColor: 'grey'}} style={{float: 'right'}}>
-            Done
-        </Button>
+        
       </Box>
     );
   }
@@ -68,9 +66,7 @@ function TextFields() {
           />
         </div>
         <div className='center'>
-        <Button variant="contained" onClick={console.log("Change this to show confirmed status")} sx={{backgroundColor: 'grey'}}>
-            Done
-        </Button>
+        
         </div>
         
       </Box>
@@ -118,6 +114,7 @@ function Contract() {
                 <div>
                 {/* Duration */}
                     <h2 className='spacing'>Duration of goal</h2>
+                    <p className='spacing'>Slide the slider to the number of weeks that you would like</p>
                 </div>
                 <div className='spacing'>
                     <DurationSlider></DurationSlider>
@@ -140,22 +137,26 @@ function Contract() {
                     <div className='center'>
                         <Displaytext></Displaytext> 
                     </div>
-                    <div className='buttonrow'>
+                    
+                </div>
+                </div>
+                
+                </div>
+                <div className='buttonrow'>
                         <div className='buttoncenter'>
                         <Button variant="contained" onClick={console.log("Change this to show confirmed status")} sx={{backgroundColor: 'grey'}}>
                             Approve
                         </Button>
                         </div>
-                        <div className='buttoncenter'>
+                        <div className='buttoncenter1'>
                         <Button variant="contained" onClick={console.log("Change this to show confirmed status")} sx={{backgroundColor: 'grey'}}>
                             Deny
                         </Button>
                         </div>
                     </div>
-                </div>
-                </div>
-                
-            </div>
+
+
+            
               
         </div>
     );
