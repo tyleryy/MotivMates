@@ -116,11 +116,13 @@ function Contract() {
     const app = global_vars.app;
     const RTdatabase = getDatabase(app)
 
-    useEffect(() => {
+    // useEffect(() => {
 
 
       // const contract_listener = ref(RTdatabase, 'users/' + )
     }, [])
+    //   const contract_listener = ref(RTdatabase, 'users/' + )
+    // }, [])
 
     // set(ref(RTdatabase, 'users/', localStorage.getItem("email")), {
     //   username: name
