@@ -23,7 +23,7 @@ import {setDoc, doc, getDoc} from 'firebase/firestore';
 
 import { useNavigate } from "react-router-dom";
 
-import { collection, getDocs } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 
 function Addfriend() {
   const [open, setOpen] = useState(false);
@@ -150,12 +150,11 @@ function Menu() {
   const db = globals.db;
   const [friendData, setFriendData] = useState([]);
   const fetchFriends = async () => {
-    await getDocs(collection(db, "relations"))
-            .then((querySnapshot)=>{               
-                const newData = querySnapshot.docs
-                    .map((doc) => ({...doc.data(), id:doc.id }));
-                setFriendData(newData);                
-                console.log(friendListType, newData);
+    await getDoc(doc(db, "relations", "linbn@uci.edu"))
+            .then((querySnapshot)=>{
+                if (!querySnapshot.exists()) {throw Error();}               
+                const newData = querySnapshot.data();
+                setFriendData(newData);
             })
   }
 
@@ -167,15 +166,15 @@ function Menu() {
   let arr = [];
   let func = () => {navigate('/menu');};
   if (friendListType === 2)
-  { arr = ["pending"]; }
+  { arr = friendData.incoming_req; }
   else if (friendListType === 1)
   { 
-    arr = ["inactive", "inactive", "inactive"];
+    arr = friendData.friends.Active;
     func = goToContract;
   }
   else 
   { 
-    arr = ["accepted", "accepted"]; 
+    arr = friendData.friends.Inactive;
     func = goToGoal;
   }
   friends.current = [...arr];
