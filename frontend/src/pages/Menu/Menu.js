@@ -94,11 +94,11 @@ function Menu() {
   const [friendListType, setFriendListType] = React.useState(3);
   const friends = React.useRef([]);
 
-
+  // This is where the database returns friends list
   let arr = [];
-  if (friendListType == 2)
+  if (friendListType === 2)
   { arr = ["pending"]; }
-  else if (friendListType == 1)
+  else if (friendListType === 1)
   { arr = ["inactive", "inactive", "inactive"]; }
   else 
   { arr = ["accepted", "accepted"]; }
@@ -119,7 +119,7 @@ function Menu() {
     </div>
     <div>
         {/* Bottom navigation */}
-        <FriendList friends={friends.current}/>
+        <FriendList friends={friends.current} type={friendListType}/>
         
     </div>
    </div>
