@@ -104,7 +104,7 @@ function TextFields() {
 function Contract() {
 
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const goToMenu = (e) => {
     e.preventDefault();
