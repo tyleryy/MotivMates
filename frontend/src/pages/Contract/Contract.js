@@ -112,15 +112,20 @@ function Contract() {
   }
 
   
-    const global_vars = useContext(Context);
-    const app = global_vars.app;
-    const RTdatabase = getDatabase(app)
+    // const global_vars = useContext(Context);
+    // const app = global_vars.app;
+    // const db = global_vars.db;
+    // const RTdatabase = getDatabase(app)
 
-    useEffect(() => {
+    // const handleAwait = async () => {
+      
+    //   const contract_listener = ref(RTdatabase, 'users/' + )
 
+    // }
 
-      // const contract_listener = ref(RTdatabase, 'users/' + )
-    }, [])
+    // useEffect(() => {
+    //   handleAwait();
+    // }, [])
 
     // set(ref(RTdatabase, 'users/', localStorage.getItem("email")), {
     //   username: name
