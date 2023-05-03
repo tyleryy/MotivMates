@@ -34,7 +34,6 @@ import { useNavigate } from "react-router-dom";
           valueLabelDisplay="on"
           max={30}
         />
-        
       </Box>
     );
   }
