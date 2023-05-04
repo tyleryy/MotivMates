@@ -5,6 +5,8 @@ import { Button, List, ListItem, Grid, Card, CardActionArea } from '@mui/materia
 import { styled } from '@mui/material/styles';
 import { Context } from '../../../providers/provider';
 import {setDoc, doc, updateDoc} from 'firebase/firestore';
+import { getDatabase, ref, set} from "firebase/database"
+
 
 
 function PendingCell({ value }) {
@@ -16,6 +18,7 @@ function PendingCell({ value }) {
     const globals = React.useContext(Context);
     const db = globals.db;
     const config = globals.config;
+    const RT = globals.RT
     const email = localStorage.getItem("email")
     
     const generateLobbyCode = () => {
@@ -31,18 +34,18 @@ function PendingCell({ value }) {
     }
 
     const fetchData = async () => {
-        let x = generateLobbyCode()
-        console.log(x)
+        let contract_id = generateLobbyCode()
         await updateDoc(doc(db, 'relations', email), {
-            "contract_id": x
+            "contract_id": contract_id
           })
-          await updateDoc(doc(db, 'relations', value), {
-            "contract_id": x
-          })
+        await updateDoc(doc(db, 'relations', value), {
+        "contract_id": contract_id
+        })
     }
 
     const handleClick = () => {
         fetchData()
+        alert("Accepted Friend")
     }
 
     return (
@@ -67,7 +70,7 @@ function FriendCell({value, func}) {
 
     return (
         <FriendCard raised="true">
-            <CardActionArea sx={{ width: "100%", height: "100%" }} onClick={() => {func()}}>
+            <CardActionArea sx={{ width: "100%", height: "100%" }} onClick={() => {func(value)}}>
                 <ListItem>
                     {value}
                 </ListItem>

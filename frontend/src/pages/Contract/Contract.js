@@ -5,24 +5,23 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { Context } from '../../providers/provider';
 import { useNavigate } from "react-router-dom";
+import {doc, getDoc} from 'firebase/firestore';
 
 
 //   function valuetext(value: number) {
 //     return `${value}°C`;
 //   }
-  
-  function DurationSlider() {
 
-    const [sliderVal, changeSliderVal] = useState(1);
-    
-
-
+  function DurationSlider({contract_id: contract_id, state: sliderVal, stateChanger: changeSliderVal}) {
     // useEffect( () => {
     //   console.log(sliderVal)
     // })
+
+    const global_vars = useContext(Context);
+    const RT = global_vars.RT
 
     return (
       <Box sx={{ width: 400 }}>
@@ -30,7 +29,10 @@ import { useNavigate } from "react-router-dom";
           value={sliderVal}
           aria-label="Volume"
           defaultValue={1}
-          onChange={(e)=>changeSliderVal(e.target.value)}
+          onChange={(e)=>{
+            changeSliderVal(e.target.value)
+          }
+          }
           valueLabelDisplay="on"
           max={30}
         />
@@ -40,10 +42,9 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function TextFields() {
-
-  const [textEdit, textEditChange] = useState("")
-
+function TextFields({contract_id: contract_id, state: textEdit, stateChanger: textEditChange}) {
+    const global_vars = useContext(Context);
+    const RT = global_vars.RT
     return (
       <Box
         component="form"
@@ -60,7 +61,9 @@ function TextFields() {
             rows={4}
             defaultValue=""
             value={textEdit}
-            onChange={(e) => {textEditChange(e.target.value)}}
+            onChange={(e) => {
+              textEditChange(e.target.value)
+            }}
           />
         </div>
         
@@ -69,9 +72,7 @@ function TextFields() {
   }
 
 
-  function Displaytext() {
-    const [textView, textViewChange] = useState("")
-
+  function Displaytext({contract_id: contract_id, state: displayView, stateChanger: displayViewChange}) {
     return (
         <div className='text'>
           <Box
@@ -92,7 +93,7 @@ function TextFields() {
               fontWeight: '700',
             }}
           style={{width: '100%'}}>
-            {textView}
+            {displayView}
           </Box>
           
         </div>
@@ -103,6 +104,8 @@ function TextFields() {
 function Contract() {
 
 
+
+
   const navigate = useNavigate(); 
 
   const goToMenu = (e) => {
@@ -111,25 +114,46 @@ function Contract() {
   }
 
   
-    // const global_vars = useContext(Context);
-    // const app = global_vars.app;
-    // const db = global_vars.db;
-    // const RTdatabase = getDatabase(app)
+    const global_vars = useContext(Context);
+    const app = global_vars.app;
+    const db = global_vars.db;
+    const RT = global_vars.RT
+    const email = localStorage.getItem('email')
 
-    // const handleAwait = async () => {
-      
-    //   const contract_listener = ref(RTdatabase, 'users/' + )
+    const [sliderVal, changeSliderVal] = useState(2);
+    const [textEdit, textEditChange] = useState("")
+    const [displayView, displayViewChange] = useState("")
+    const contract_id = localStorage.getItem("contract-id")
 
-    // }
+    const fetchData = async () => {
+      const contract_ref = ref(RT, `users/contract_id/${contract_id}`)
+      console.log("attaching listener")
+      onValue(contract_ref, (snapshot) => {
+        const data = snapshot.val();
 
-    // useEffect(() => {
-    //   handleAwait();
-    // }, [])
+        console.log("Re-rendering data:")
+        console.log(data)
+        changeSliderVal(data.time)
+        textEditChange(data.text)
+        displayViewChange(data.display)
+      })
+    }
 
-    // set(ref(RTdatabase, 'users/', localStorage.getItem("email")), {
-    //   username: name
-    // } )
+    useEffect(() => {
+      console.log(contract_id)
+      console.log(sliderVal, textEdit, displayView)
+    } )
 
+    useEffect(() => {
+      fetchData();
+    }, [])
+
+    // listens for state changes and writes to DB
+    useEffect(() => {
+      console.log("writing to DB")
+      const user_ref = ref(RT, 'users/contract_id/'+contract_id)
+      set(user_ref, {text: textEdit, display: displayView, time: sliderVal})
+    }, [sliderVal, textEdit, displayView])
 
     return(
         <div>
@@ -149,7 +173,7 @@ function Contract() {
                     <p className='spacing'>Slide the slider to the number of days that you would like</p>
                 </div>
                 <div className='spacing'>
-                    <DurationSlider></DurationSlider>
+                    <DurationSlider contract_id={contract_id} state={sliderVal} stateChanger={changeSliderVal}></DurationSlider>
                     
                 </div>
             </div>
@@ -164,10 +188,10 @@ function Contract() {
                         Insert your personal goal
                     </p>
                     </div>
-                    <TextFields></TextFields>
+                    <TextFields contract_id={contract_id} state={textEdit} stateChanger={textEditChange}></TextFields>
                     
                     <div className='center'>
-                        <Displaytext></Displaytext> 
+                        <Displaytext contract_id={contract_id} state={displayView} stateChanger={displayViewChange}></Displaytext> 
                     </div>
                     
                 </div>

@@ -21,9 +21,10 @@ import FriendList from './Friendlist/Friendlist.js';
 import { Context } from '../../providers/provider';
 import {setDoc, doc, getDoc} from 'firebase/firestore';
 
+import { getDatabase, ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
-import { collection } from "firebase/firestore";
+
 
 function Addfriend() {
   const [open, setOpen] = useState(false);
@@ -141,13 +142,27 @@ function Menu() {
     navigate('/goal');
   }
 
+
+  const contractEnter = async (otherUser) => {
+    const user_data = await getDoc(doc(db, `relations/${email}` ))
+    const contract_id = user_data.data()["contract_id"]
+    localStorage.setItem("contract-id", contract_id)
+      
+    // const contract_listener = ref(RT, 'users/contract_id/' + contract_id)
+    
+    // set(contract_listener, {text: "", display: "",  time: 0})
+  }
+
   const goToContract = (e) => {
+    contractEnter(e);
     navigate('/contract');
   }
 
   // Database Stuff
   const globals = useContext(Context);
   const db = globals.db;
+  const RT = globals.RT
+
   const [friendData, setFriendData] = useState([]);
   const fetchFriends = async () => {
     let querySnapshot = await getDoc(doc(db, "relations", email))

@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import * as React from 'react';
+import {useState} from 'react';
 import './App.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
@@ -12,6 +12,7 @@ import Signup from './pages/Signup/Signup';
 import firebase from 'firebase/compat/app';
 import { getFirestore } from 'firebase/firestore';
 import { Provider } from './providers/provider';
+import { getDatabase } from 'firebase/database';
 
 const theme = createTheme({
   palette: {
@@ -41,15 +42,20 @@ const config = {
 };
 const app = firebase.initializeApp(config);
 const db = getFirestore(app);
+const RT = getDatabase(app)
 
-const global_vars = {
-  "app": app,
-  "config": config,
-  "db": db
-}
+
 
 
 function App() {
+
+  const global_vars = {
+    "app": app,
+    "config": config,
+    "db": db,
+    "RT": RT
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Provider contexts={global_vars}>
