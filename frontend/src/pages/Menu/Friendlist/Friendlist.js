@@ -41,6 +41,7 @@ function PendingCell({ value }) {
         await updateDoc(doc(db, 'relations', value), {
         "contract_id": contract_id
         })
+        
     }
 
     const handleClick = () => {

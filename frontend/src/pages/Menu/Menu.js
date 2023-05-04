@@ -143,7 +143,9 @@ function Menu() {
   }
 
 
-  const contractEnter = async (otherUser) => {
+  const contractEnter = async () => {
+
+    // TODO doesn't support multiple contracts yet
     const user_data = await getDoc(doc(db, `relations/${email}` ))
     const contract_id = user_data.data()["contract_id"]
     localStorage.setItem("contract-id", contract_id)
